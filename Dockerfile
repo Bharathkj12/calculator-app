@@ -14,7 +14,7 @@ FROM openjdk:17-slim
 
 WORKDIR /app
 
-COPY target/calculator-app.jar /app/calculator-app.jar
+COPY target/calculator-app-1.0-SNAPSHOT.jar /app/calculator-app.jar
 
 EXPOSE 8000
 
