@@ -1,13 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3'  // Use the exact name of your Maven installation here
-        jdk 'jdk-17'     // Ensure the JDK name matches the one configured
-    }
-
     environment {
-        MAVEN_HOME = tool name: 'Maven 3', type: 'Maven'
+        MAVEN_HOME = '/usr/share/maven' // Explicitly set Maven home
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -19,14 +15,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn clean install"
+                    sh "mvn clean install"
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn test"
+                    sh "mvn test"
                 }
             }
         }
