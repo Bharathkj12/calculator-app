@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'M3' // Assuming Maven is already installed in Jenkins tool configuration
+        jdk 'jdk-17' // Ensure JDK 17 is installed in Jenkins tool configuration
+    }
+
+    environment {
+        MAVEN_HOME = tool name: 'M3', type: 'Maven'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh "${MAVEN_HOME}/bin/mvn clean install"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    sh "${MAVEN_HOME}/bin/mvn test"
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    sh 'docker build -t calculator-app .'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'docker run -d -p 8000:8000 calculator-app'
+                }
+            }
+        }
+    }
+}
