@@ -10,16 +10,12 @@ COPY . .
 # Build the application using Maven
 RUN mvn clean install
 
-# Use an openjdk 17 image for the final image
-FROM openjdk:17-jre-slim
+FROM openjdk:17-slim
 
 WORKDIR /app
 
-# Copy the jar file from the build stage
-COPY --from=build /app/target/calculator-app-1.0-SNAPSHOT.jar /app/calculator-app.jar
+COPY target/calculator-app.jar /app/calculator-app.jar
 
-# Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 8000
 
-# Run the Java application
 CMD ["java", "-jar", "calculator-app.jar"]
