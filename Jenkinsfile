@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker run -d -p 8000:8000 calculator1-app'
+                    sh 'docker run -d -p 8000:8000 calculator12-app'
                 }
             }
         }
