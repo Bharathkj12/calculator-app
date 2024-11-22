@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3' // This refers to the Maven installation name configured in Jenkins
-        jdk 'jdk-17' // This refers to the JDK installation name configured in Jenkins
+        maven 'Maven 3'  // Use the exact name of your Maven installation here
+        jdk 'jdk-17'     // Ensure the JDK name matches the one configured
     }
 
     environment {
-        MAVEN_HOME = tool name: 'M3', type: 'Maven'
+        MAVEN_HOME = tool name: 'Maven 3', type: 'Maven'
     }
 
     stages {
