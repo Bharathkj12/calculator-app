@@ -33,13 +33,17 @@ pipeline {
                 }
             }
         }
-         stage('Stop and Remove Old Container') {
-            // Stop and remove the old container (if it exists)
-            sh '''
-                docker stop my_container || true
-                docker rm my_container || true
-            '''
-         }
+     stage('Stop and Remove Old Container') {
+            steps {
+                script {
+                    // Stop and remove the old container (if running)
+                    sh '''
+                        docker stop my_container || true
+                        docker rm my_container || true
+                    '''
+                }
+            }
+     }
         stage('Deploy') {
             steps {
                 script {
