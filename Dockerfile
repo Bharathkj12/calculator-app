@@ -1,5 +1,6 @@
 # Use an official Maven image with JDK 17 to build the application
-FROM maven:3.8.7-openjdk-17 as build
+FROM maven:latest as build
+
 
 # Set the working directory in the container
 WORKDIR /app
