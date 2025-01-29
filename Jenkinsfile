@@ -29,14 +29,14 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    sh 'sudo docker build -t calculator-app .'
+                    sh 'docker build -t calculator-app .'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    sh 'sudo docker run -d -p 8000:8000 calculator-app'
+                    sh 'docker run -d -p 8000:8000 calculator-app'
                 }
             }
         }
